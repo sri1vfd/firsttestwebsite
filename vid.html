@@ -1,0 +1,64 @@
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+  <video id="my-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" controls>
+    <source src="C:\Users\Anu\Downloads\Video\Rana.mp4" type="video/mp4">
+    <source src="https://youtu.be/c_gXrw1RoKo" type="video/webm">
+    <source src="https://youtu.be/c_gXrw1RoKo" type="video/ogg">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<style>
+  #my-video {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 4px #eee;
+  }
+</style>
+
+<script>
+  var video = document.getElementById('my-video');
+var startX, endX;
+
+video.addEventListener('play', function() {
+  // Do something when the video starts playing
+});
+
+video.addEventListener('pause', function() {
+  // Do something when the video is paused
+});
+
+video.addEventListener('ended', function() {
+  // Do something when the video ends
+});
+
+video.addEventListener('dblclick', function() {
+  if (video.currentTime + 10 < video.duration) {
+    video.currentTime += 10;
+  } else {
+    video.currentTime = video.duration;
+  }
+});
+
+video.addEventListener('touchstart', function(e) {
+  startX = e.changedTouches[0].screenX;
+});
+
+video.addEventListener('touchend', function(e) {
+  endX = e.changedTouches[0].screenX;
+  if (endX > startX && video.currentTime > 0) {
+    // Swipe right to move backward by 10 seconds
+    if (video.currentTime - 10 > 0) {
+      video.currentTime -= 10;
+    } else {
+      video.currentTime = 0;
+    }
+  } else if (endX < startX && video.currentTime < video.duration) {
+    // Swipe left to move forward by 10 seconds
+    if (video.currentTime + 10 < video.duration) {
+      video.currentTime += 10;
+    } else {
+      video.currentTime = video.duration;
+    }
+  }
+});
+
+</script>
